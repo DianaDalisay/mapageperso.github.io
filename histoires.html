@@ -1,0 +1,139 @@
+HTML
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Histoires - Diana</title>
+    <style>
+        /* Reprise des styles de la page d'accueil pour la cohérence */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        #content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            color: #FFB6C1; /* Rose Clair */
+            font-size: 2.3em;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Bouton de retour à l'accueil */
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #FFB6C1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95em;
+            padding: 8px 16px;
+            border: 1px solid #FFB6C1;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #FFB6C1;
+            color: #121212;
+        }
+
+        /* Cartes d'histoires / Bloc de texte */
+        .story-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #222;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .story-card h2 {
+            color: #fff;
+            margin-top: 0;
+            font-size: 1.5em;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .story-date {
+            color: #FFB6C1;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .story-card p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .story-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="content">
+
+        <!-- Bouton de retour -->
+        <a href="index.html" class="btn-back">← Retour à l'accueil</a>
+
+        <header>
+            <h1>Mes Histoires & Confidences</h1>
+            <p style="color: #888;">Bienvenue dans mon journal intime, sans filtre et sans modération.</p>
+        </header>
+
+        <main>
+
+            <!-- Histoire 1 -->
+            <article class="story-card">
+                <h2>Mon histoire n°1 : La genèse de ce site</h2>
+                <div class="story-date">Publié le 12 Février 2026</div>
+                
+                <p>Bienvenue dans cet espace ! Je voulais partager avec vous ce qui m'a poussée à quitter les plateformes classiques pour créer mon propre site web...</p>
+                
+                <!-- Optionnel : Ajouter une image pour l'histoire -->
+                <!-- <img src="Diana_002.PNG" alt="Diana" class="story-img"> -->
+
+                <p>Ici, je peux raconter mes anecdotes quotidiennes, mes rencontres et mon parcours en toute liberté.</p>
+            </article>
+
+            <!-- Histoire 2 -->
+            <article class="story-card">
+                <h2>Mon histoire n°2 : Mon premier rendez-vous mystère</h2>
+                <div class="story-date">Publié le 20 Février 2026</div>
+                
+                <p>Aujourd'hui, j'avais envie de vous raconter une petite anecdote plutôt piquante...</p>
+                <p>Installez-vous confortablement, voici ce qui s'est passé...</p>
+            </article>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
