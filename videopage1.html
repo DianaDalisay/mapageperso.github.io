@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catégories Galerie - Diana</title>
+    <title>Mes photos pros</title>
     <style>
-        /* Base styles consistent with the main theme */
+        /* Styles globaux cohérents avec le reste du site */
         body {
             background-color: #121212;
             color: #e0e0e0;
@@ -21,7 +21,7 @@
             padding: 40px 20px;
         }
 
-        /* Navigation back button */
+        /* Bouton de retour à l'accueil */
         .btn-back {
             display: inline-block;
             margin-bottom: 25px;
@@ -42,14 +42,14 @@
 
         header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             border-bottom: 1px solid #333;
             padding-bottom: 20px;
         }
 
         header h1 {
             color: #FFB6C1;
-            font-size: 2.2em;
+            font-size: 2.3em;
             margin: 0 0 10px 0;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -58,152 +58,173 @@
         header p {
             color: #aaa;
             margin: 0;
-            font-size: 1em;
         }
 
-        /* Filter Tabs bar */
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 35px;
-        }
-
-        .tab-btn {
+        /* Bannière d'informations & discrétion */
+        .discreet-info-box {
             background-color: #1a1a1a;
-            color: #ccc;
-            border: 1px solid #333;
-            padding: 10px 18px;
-            border-radius: 20px;
-            cursor: pointer;
+            border: 1px solid #FFB6C1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .info-item {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .info-item h3 {
+            color: #FFB6C1;
+            margin-top: 0;
+            font-size: 1.1em;
+        }
+
+        .info-item p {
             font-size: 0.9em;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            color: #ccc;
+            margin: 5px 0 0 0;
         }
 
-        .tab-btn:hover, .tab-btn.active {
-            background-color: #FFB6C1;
-            color: #121212;
-            border-color: #FFB6C1;
-        }
-
-        /* Category Grid Layout */
-        .category-grid {
+        /* Grille des articles */
+        .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
+            margin-top: 20px;
         }
 
-        .category-card {
+        /* Carte de produit */
+        .shop-card {
             background-color: #1a1a1a;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #252525;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            border: 1px solid #222;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.3s ease, border-color 0.3s ease;
-            position: relative;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
         }
 
-        .category-card:hover {
-            transform: translateY(-6px);
+        .shop-card:hover {
+            transform: translateY(-5px);
             border-color: #FFB6C1;
         }
 
-        .card-img-wrapper {
+        .card-img-container {
             position: relative;
             width: 100%;
-            height: 240px;
-            overflow: hidden;
+            height: 280px;
         }
 
-        .category-card img {
+        .shop-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            display: block;
         }
 
-        .category-card:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Count Badge */
-        .badge-count {
+        .price-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background-color: rgba(18, 18, 18, 0.85);
-            color: #FFB6C1;
-            font-size: 0.8em;
-            font-weight: bold;
-            padding: 5px 12px;
-            border-radius: 15px;
-            border: 1px solid #FFB6C1;
-            backdrop-filter: blur(4px);
-        }
-
-        /* Type Icon Badge */
-        .type-tag {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
             background-color: #FFB6C1;
             color: #121212;
-            font-size: 0.75em;
             font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
+            font-size: 1.1em;
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
-        .card-body {
+        .card-content {
             padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-title {
             color: #fff;
-            font-size: 1.25em;
-            margin: 0 0 8px 0;
+            font-size: 1.3em;
+            margin: 0 0 10px 0;
+        }
+
+        .card-description {
+            color: #bbb;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            font-size: 0.85em;
+            color: #888;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 10px;
+        }
+
+        .options-list li {
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 8px;
         }
 
-        .card-desc {
-            color: #aaa;
-            font-size: 0.9em;
-            margin: 0;
-        }
-
-        .btn-explore {
-            display: inline-block;
-            margin-top: 15px;
+        .options-list li::before {
+            content: "✦";
             color: #FFB6C1;
-            font-size: 0.85em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Footer section */
-        .info-footer {
-            margin-top: 50px;
+        /* Boutons de commande */
+        .btn-order {
+            display: block;
+            width: 100%;
             text-align: center;
-            padding: 20px;
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            border: 1px solid #222;
+            background-color: #252525;
+            color: #FFB6C1;
+            border: 1px solid #FFB6C1;
+            padding: 12px 0;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
-        .info-footer p {
-            margin: 0;
-            color: #888;
-            font-size: 0.9em;
+        .btn-order:hover {
+            background-color: #FFB6C1;
+            color: #121212;
+        }
+
+        /* Section commandes personnalisées */
+        .custom-order-section {
+            margin-top: 50px;
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #FFB6C1;
+            text-align: center;
+        }
+
+        .custom-order-section h2 {
+            color: #FFB6C1;
+            margin-top: 0;
+        }
+
+        .custom-order-section p {
+            color: #ccc;
+            max-width: 700px;
+            margin: 10px auto 20px auto;
         }
     </style>
 </head>
@@ -232,7 +253,7 @@
             <!-- Catégorie 1 : Lingerie -->
             <a href="shooting.html" class="category-card" data-tags="photo lingerie">
                 <div class="card-img-wrapper">
-                    <img src="Diana_004.png" alt="Shooting Lingerie & Dentelle">
+                    <img src="Shooting001.png" alt="Shooting Lingerie & Dentelle">
                     <span class="badge-count">24 Photos</span>
                     <span class="type-tag">Photos</span>
                 </div>
