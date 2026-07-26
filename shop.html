@@ -322,15 +322,20 @@
             </div>
 
             <!-- Section sur-mesure -->
-            <div class="custom-order-section">
-                <h2>Vidéo personnalisée ✨</h2>
-            <div class="image-container">
-                    <img src="Diana_007.png" alt="Pack privilège">
-                    <span class="price-badge">150€</span>
-                </div>
-                <p>Vous ne souhaitez pas acheter une tenue mais obtenir une vidéo personnalisée ? Commandez-moi une vidéo selon vos gouts</p>
-                <a href="mailto:votre-email@exemple.com?subject=Demande%20sur%20mesure" class="btn-order" style="max-width: 300px; margin: 0 auto;">Commander une vidéo personnalisée</a>
-            </div>
+<div class="custom-order-section">
+    <h2>Vidéo personnalisée ✨</h2>
+    
+    <!-- Ajout de position: relative et d'une largeur max ici -->
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 300px;">
+        <img src="Diana_007.png" alt="Pack privilège" style="width: 100%; height: auto; display: block;">
+        
+        <!-- Ajout de position: absolute pour placer le badge sur l'image -->
+        <span class="price-badge" style="position: absolute; top: 10px; right: 10px;">150€</span>
+    </div>
+
+    <p>Vous ne souhaitez pas acheter une tenue mais obtenir une vidéo personnalisée ? Commandez-moi une vidéo selon vos gouts</p>
+    <a href="mailto:votre-email@exemple.com?subject=Demande%20sur%20mesure" class="btn-order" style="max-width: 300px; margin: 0 auto;">Commander une vidéo personnalisée</a>
+</div>
         </main>
 
     </div>
