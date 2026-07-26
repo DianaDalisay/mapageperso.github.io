@@ -1,9 +1,18 @@
+Voici le code mis à jour.
+
+J'ai apporté les deux modifications demandées :
+
+Un bouton de retour vers videopage1.html placé sous le titre principal.
+
+Une réduction de la taille des photos sur la galerie (passage à une largeur maximale de 180px par carte et hauteur de 200px), qui s'agrandissent toujours en plein écran lorsqu'on clique dessus.
+
+HTML
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maman cochonne</title>
+    <title>Photo pros</title>
     <style>
         /* Styles de base pour rendre la page élégante */
         body {
@@ -39,24 +48,45 @@
         header p {
             color: #aaa;
             font-size: 1.1em;
-            margin: 0;
+            margin: 0 0 20px 0;
         }
 
-        /* Grille de la galerie */
+        /* Bouton de retour vers videopage1.html */
+        .btn-back {
+            display: inline-block;
+            background-color: transparent;
+            color: #FFB6C1;
+            border: 1px solid #FFB6C1;
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #FFB6C1;
+            color: #121212;
+        }
+
+        /* Grille de la galerie - Adaptée pour de petites miniatures */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            justify-items: center;
         }
 
-        /* Cartes photo */
+        /* Cartes photo plus petites */
         .photo-card {
             background-color: #1e1e1e;
             border: 1px solid #333;
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer; /* Ajout d'un curseur main pour indiquer que c'est cliquable */
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px; /* Taille maximale pour garder des vignettes compactes */
         }
 
         .photo-card:hover {
@@ -64,11 +94,11 @@
             border-color: #FFB6C1; /* Accentuation au survol */
         }
 
-        /* Conteneur de l'image */
+        /* Conteneur de l'image réduite */
         .photo-wrapper {
             position: relative;
             width: 100%;
-            height: 320px;
+            height: 200px; /* Hauteur réduite pour les vignettes */
             overflow: hidden;
         }
 
@@ -79,80 +109,31 @@
             display: block;
         }
 
-        /* Badge de prix superposé sur l'image */
-        .price-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background-color: rgba(18, 18, 18, 0.85);
-            color: #FFB6C1;
-            border: 1px solid #FFB6C1;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9em;
-            backdrop-filter: blur(4px);
-        }
-
-        /* Description sous l'image */
-        .photo-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .photo-info h3 {
-            color: #ffffff;
-            font-size: 1.2em;
-            margin: 0 0 8px 0;
-        }
-
-        /* Bouton de commande */
-        .btn-order {
-            display: inline-block;
-            background-color: transparent;
-            color: #FFB6C1;
-            border: 1px solid #FFB6C1;
-            padding: 8px 16px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-top: 5px;
-        }
-
-        .btn-order:hover {
-            background-color: #FFB6C1;
-            color: #121212;
-        }
-
         /* --- STYLES DE LA LIGHTBOX (AGRANDISSEMENT) --- */
         
-        /* Conteneur principal invisible par défaut */
         #lightbox {
-            display: none; /* Caché par défaut */
+            display: none;
             position: fixed;
-            z-index: 1000; /* Par-dessus tout */
+            z-index: 1000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9); /* Fond noir transparent */
+            background-color: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Empêche le défilement de la page derrière */
+            overflow: hidden;
         }
 
-        /* L'image agrandie elle-même */
         #lightbox-img {
             max-width: 90%;
             max-height: 90%;
             border: 2px solid #333;
             border-radius: 8px;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            object-fit: contain; /* Garde les proportions sans couper */
+            object-fit: contain;
         }
 
-        /* Bouton pour fermer */
         #lightbox-close {
             position: absolute;
             top: 20px;
@@ -174,13 +155,11 @@
 <body>
 
     <div id="content">
-
-        <!-- Bouton retour -->
-        <a href="videopage1.html" class="btn-back">← Retour aux photos</a>
-        
         <header>
             <h1>Photo pros</h1>
             <p>Galerie exclusive & modèles</p>
+            <!-- Bouton de retour vers la page vidéo -->
+            <a href="videopage1.html" class="btn-back">← Retour aux vidéos</a>
         </header>
 
         <main class="gallery-grid">
@@ -188,7 +167,6 @@
             <!-- Photo 1 -->
             <div class="photo-card">
                 <div class="photo-wrapper">
-                    <!-- J'ai ajouté une classe 'gallery-img' ici -->
                     <img src="Shooting002.png" alt="Modèle 1" class="gallery-img">
                 </div>
             </div>
@@ -196,7 +174,6 @@
             <!-- Photo 2 -->
             <div class="photo-card">
                 <div class="photo-wrapper">
-                    <!-- J'ai ajouté une classe 'gallery-img' ici -->
                     <img src="Shooting003.png" alt="Modèle 2" class="gallery-img">
                 </div>
             </div>
@@ -204,57 +181,46 @@
         </main>
     </div>
 
-    <!-- --- STRUCTURE HTML DE LA LIGHTBOX --- -->
+    <!-- STRUCTURE HTML DE LA LIGHTBOX (PLEIN ÉCRAN) -->
     <div id="lightbox">
         <span id="lightbox-close">&times;</span>
         <img id="lightbox-img" src="" alt="Image agrandie">
     </div>
 
-    <!-- --- SCRIPT JAVASCRIPT --- -->
+    <!-- SCRIPT JAVASCRIPT POUR L'AGRANDISSEMENT AU CLIC -->
     <script>
-        // Sélection des éléments
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
         const galleryImages = document.querySelectorAll('.gallery-img');
 
-        // Pour chaque image de la galerie
         galleryImages.forEach(image => {
             image.addEventListener('click', () => {
-                // 1. Récupérer la source de l'image cliquée
                 const imageSrc = image.getAttribute('src');
-                // 2. Mettre cette source dans l'image de la lightbox
                 lightboxImg.setAttribute('src', imageSrc);
-                // 3. Afficher la lightbox (en flex pour centrer)
                 lightbox.style.display = 'flex';
-                // 4. Empêcher le scroll de la page principale
                 document.body.style.overflow = 'hidden';
             });
         });
 
-        // Fermer la lightbox quand on clique sur le 'X'
         lightboxClose.addEventListener('click', () => {
             lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Rétablir le scroll
+            document.body.style.overflow = 'auto';
         });
 
-        // Fermer aussi quand on clique n'importe où sur le fond noir
         lightbox.addEventListener('click', (e) => {
-            // S'assurer qu'on n'a pas cliqué sur l'image elle-même
             if (e.target !== lightboxImg) {
                 lightbox.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
         
-        // Fermer avec la touche 'Echap'
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.style.display === 'flex') {
                 lightbox.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
-
     </script>
 
 </body>
