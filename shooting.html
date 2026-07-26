@@ -56,6 +56,7 @@
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer; /* Ajout d'un curseur main pour indiquer que c'est cliquable */
         }
 
         .photo-card:hover {
@@ -123,6 +124,51 @@
             background-color: #FFB6C1;
             color: #121212;
         }
+
+        /* --- STYLES DE LA LIGHTBOX (AGRANDISSEMENT) --- */
+        
+        /* Conteneur principal invisible par défaut */
+        #lightbox {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            z-index: 1000; /* Par-dessus tout */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Fond noir transparent */
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Empêche le défilement de la page derrière */
+        }
+
+        /* L'image agrandie elle-même */
+        #lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            object-fit: contain; /* Garde les proportions sans couper */
+        }
+
+        /* Bouton pour fermer */
+        #lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #e0e0e0;
+            font-size: 40px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #lightbox-close:hover {
+            color: #FFB6C1;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -138,21 +184,74 @@
             <!-- Photo 1 -->
             <div class="photo-card">
                 <div class="photo-wrapper">
-                    <img src="Shooting002.png" alt="Modèle 1">
+                    <!-- J'ai ajouté une classe 'gallery-img' ici -->
+                    <img src="Shooting002.png" alt="Modèle 1" class="gallery-img">
                 </div>
-
+            </div>
 
             <!-- Photo 2 -->
             <div class="photo-card">
                 <div class="photo-wrapper">
-                    <img src="Shooting003.png" alt="Modèle 2">
-                                </div>
-
-
-
+                    <!-- J'ai ajouté une classe 'gallery-img' ici -->
+                    <img src="Shooting003.png" alt="Modèle 2" class="gallery-img">
+                </div>
+            </div>
 
         </main>
     </div>
+
+    <!-- --- STRUCTURE HTML DE LA LIGHTBOX --- -->
+    <div id="lightbox">
+        <span id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Image agrandie">
+    </div>
+
+    <!-- --- SCRIPT JAVASCRIPT --- -->
+    <script>
+        // Sélection des éléments
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const galleryImages = document.querySelectorAll('.gallery-img');
+
+        // Pour chaque image de la galerie
+        galleryImages.forEach(image => {
+            image.addEventListener('click', () => {
+                // 1. Récupérer la source de l'image cliquée
+                const imageSrc = image.getAttribute('src');
+                // 2. Mettre cette source dans l'image de la lightbox
+                lightboxImg.setAttribute('src', imageSrc);
+                // 3. Afficher la lightbox (en flex pour centrer)
+                lightbox.style.display = 'flex';
+                // 4. Empêcher le scroll de la page principale
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Fermer la lightbox quand on clique sur le 'X'
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Rétablir le scroll
+        });
+
+        // Fermer aussi quand on clique n'importe où sur le fond noir
+        lightbox.addEventListener('click', (e) => {
+            // S'assurer qu'on n'a pas cliqué sur l'image elle-même
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Fermer avec la touche 'Echap'
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+    </script>
 
 </body>
 </html>
