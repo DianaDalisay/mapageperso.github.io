@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo pros</title>
     <style>
-        /* Styles de base pour rendre la page élégante */
+        /* Styles de base */
         body {
             background-color: #121212;
             color: #e0e0e0;
@@ -60,36 +60,40 @@
             color: #121212;
         }
 
-        /* Grille de la galerie - Adaptée pour de petites miniatures */
+        /* Grille de la galerie */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
             justify-items: center;
         }
 
-        /* Cartes photo plus petites */
+        /* Style des cartes avec lien */
         .photo-card {
             background-color: #1e1e1e;
             border: 1px solid #333;
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             width: 100%;
-            max-width: 200px; /* Taille maximale pour garder des vignettes compactes */
+            max-width: 240px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
         }
 
         .photo-card:hover {
             transform: translateY(-5px);
-            border-color: #FFB6C1; /* Accentuation au survol */
+            border-color: #FFB6C1;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
         }
 
-        /* Conteneur de l'image réduite */
+        /* Conteneur de l'image */
         .photo-wrapper {
             position: relative;
             width: 100%;
-            height: 200px; /* Hauteur réduite pour les vignettes */
+            height: 220px;
             overflow: hidden;
         }
 
@@ -98,47 +102,36 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.3s ease;
         }
 
-        /* --- STYLES DE LA LIGHTBOX (AGRANDISSEMENT) --- */
-        
-        #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        .photo-card:hover .photo-wrapper img {
+            transform: scale(1.05);
         }
 
-        #lightbox-img {
-            max-width: 90%;
-            max-height: 90%;
-            border: 2px solid #333;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            object-fit: contain;
+        /* Zone de description sous l'image */
+        .card-info {
+            padding: 15px;
+            text-align: left;
+            background-color: #1e1e1e;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        #lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #e0e0e0;
-            font-size: 40px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        #lightbox-close:hover {
+        .card-title {
             color: #FFB6C1;
-            cursor: pointer;
+            font-size: 1.1em;
+            margin: 0 0 6px 0;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            color: #aaa;
+            font-size: 0.88em;
+            margin: 0;
+            line-height: 1.4;
         }
 
     </style>
@@ -149,77 +142,68 @@
         <header>
             <h1>Photo pros</h1>
             <p>Galerie exclusive & modèles</p>
-            <!-- Bouton de retour vers la page vidéo -->
             <a href="videopage1.html" class="btn-back">← Retour aux catégories</a>
         </header>
 
         <main class="gallery-grid">
 
-            <!-- Catégorie 1 : Lingerie -->
-            <a href="bikiniplage.html" class="category-card" data-tags="photo lingerie">
-                <div class="card-img-wrapper">
-                    <img src="Shooting001.png" alt="Shooting Lingerie & Dentelle">
-                    <span class="badge-count">24 Photos</span>
-                    <span class="type-tag">Photos</span>
+            <!-- Photo 01 -->
+            <a href="Bikiniplage.html" class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="BundleBikiniplage.png" alt="Pro 01 - Shooting Lingerie">
                 </div>
-                <div class="card-body">
-                    <h2 class="card-title">Shooting Lingerie & Bikini <span>✨</span></h2>
-                    <p class="card-desc">Mes photos professionnelles.</p>
-                    <span class="btn-explore">Voir la collection →</span>
+                <div class="card-info">
+                    <h2 class="card-title">Pro 01 ✨</h2>
+                    <p class="card-desc">En bikini à la plage.</p>
                 </div>
             </a>
 
-            <!-- Photo 2 -->
-            <div class="photo-card">
+            <!-- Photo 02 -->
+            <a href="pro02.html" class="photo-card">
                 <div class="photo-wrapper">
-                    <img src="Shooting003.png" alt="Modèle 2" class="gallery-img">
+                    <img src="Shooting002.png" alt="Pro 02 - Collection Bikini">
                 </div>
-            </div>
+                <div class="card-info">
+                    <h2 class="card-title">Pro 02 🌊</h2>
+                    <p class="card-desc">Session bikini & ambiance plage en extérieur.</p>
+                </div>
+            </a>
+
+            <!-- Photo 03 -->
+            <a href="pro03.html" class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="Shooting003.png" alt="Pro 03 - Portrait Glamour">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-title">Pro 03 📸</h2>
+                    <p class="card-desc">Portraits glamour & éclairages artistiques.</p>
+                </div>
+            </a>
+
+            <!-- Photo 04 -->
+            <a href="pro04.html" class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="Shooting004.png" alt="Pro 04 - Style Fashion">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-title">Pro 04 💃</h2>
+                    <p class="card-desc">Collection fashion et tenues haut de gamme.</p>
+                </div>
+            </a>
+
+            <!-- Photo 05 -->
+            <a href="pro05.html" class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="Shooting005.png" alt="Pro 05 - Ambiance Boudoir">
+                </div>
+                <div class="card-info">
+                    <h2 class="card-title">Pro 05 🌙</h2>
+                    <p class="card-desc">Série boudoir intimiste et jeux d'ombres.</p>
+                </div>
+            </a>
 
         </main>
     </div>
-
-    <!-- STRUCTURE HTML DE LA LIGHTBOX (PLEIN ÉCRAN) -->
-    <div id="lightbox">
-        <span id="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Image agrandie">
-    </div>
-
-    <!-- SCRIPT JAVASCRIPT POUR L'AGRANDISSEMENT AU CLIC -->
-    <script>
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.getElementById('lightbox-close');
-        const galleryImages = document.querySelectorAll('.gallery-img');
-
-        galleryImages.forEach(image => {
-            image.addEventListener('click', () => {
-                const imageSrc = image.getAttribute('src');
-                lightboxImg.setAttribute('src', imageSrc);
-                lightbox.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        lightboxClose.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-    </script>
 
 </body>
 </html>
