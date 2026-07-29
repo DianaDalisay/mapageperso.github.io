@@ -1,3 +1,16 @@
+Tout à fait ! C'est même une très bonne pratique : cela rend la page beaucoup plus rapide à charger, car le navigateur n'a pas besoin de télécharger et lire plusieurs vidéos en même temps pour afficher la galerie.
+
+Pour réaliser cela :
+
+Chaque vignette utilise une simple image .jpg ou .png (comme poster01.jpg, poster02.jpg, etc.).
+
+On ajoute un attribut data-video sur chaque carte/image pour indiquer le fichier .mp4 correspondant.
+
+Quand l'utilisateur clique sur la vignette, le script lit la vidéo associée et l'ouvre dans la lightbox.
+
+Voici le code mis à jour :
+
+HTML
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,7 +29,7 @@
             position: relative;
         }
 
-        /* Bouton Retour à l'accueil (Haut à gauche, rectangulaire) */
+        /* Bouton Retour à l'accueil */
         .btn-home {
             position: absolute;
             top: 20px;
@@ -90,7 +103,7 @@
             justify-items: center;
         }
 
-        /* Cartes vidéo */
+        /* Cartes de miniatures */
         .video-card {
             background-color: #1e1e1e;
             border: 1px solid #333;
@@ -107,7 +120,7 @@
             border-color: #FFB6C1;
         }
 
-        /* Conteneur de la vidéo réduite */
+        /* Conteneur de l'image miniature avec icône Play au survol */
         .video-wrapper {
             position: relative;
             width: 100%;
@@ -115,11 +128,49 @@
             overflow: hidden;
         }
 
-        .video-wrapper video {
+        .video-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* Icône "Play" superposée sur l'image */
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid #FFB6C1;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Triangle "Play" en CSS */
+        .play-icon::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-left: 12px solid #FFB6C1;
+            margin-left: 3px;
+        }
+
+        .video-card:hover .play-icon {
+            background-color: #FFB6C1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-card:hover .play-icon::after {
+            border-left-color: #121212;
         }
 
         /* --- STYLES DE LA LIGHTBOX --- */
@@ -176,61 +227,62 @@
 
         <main class="gallery-grid">
 
-            <!-- Vidéo 1 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <video src="video01.mp4" class="gallery-video" autoplay loop muted playsinline></video>
+                    <img src="video01.png" alt="Modèle 1" class="gallery-thumb" data-video="video01.mp4">
+                    <div class="play-icon"></div>
                 </div>
             </div>
 
-            <!-- Vidéo 2 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <video src="video02.mp4" class="gallery-video" autoplay loop muted playsinline></video>
+                    <img src="Bikiniplage02.png" alt="Modèle 2" class="gallery-thumb" data-video="video02.mp4">
+                    <div class="play-icon"></div>
                 </div>
             </div>
 
-            <!-- Vidéo 3 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <video src="video03.mp4" class="gallery-video" autoplay loop muted playsinline></video>
+                    <img src="Bikiniplage03.png" alt="Modèle 3" class="gallery-thumb" data-video="video03.mp4">
+                    <div class="play-icon"></div>
                 </div>
             </div>
 
-            <!-- Vidéo 4 -->
             <div class="video-card">
                 <div class="video-wrapper">
-                    <video src="video04.mp4" class="gallery-video" autoplay loop muted playsinline></video>
+                    <img src="Bikiniplage04.png" alt="Modèle 4" class="gallery-thumb" data-video="video04.mp4">
+                    <div class="play-icon"></div>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <!-- STRUCTURE HTML DE LA LIGHTBOX (VIDÉO GRAND FORMAT) -->
     <div id="lightbox">
         <span id="lightbox-close">&times;</span>
         <video id="lightbox-video" controls autoplay></video>
     </div>
 
-    <!-- SCRIPT JAVASCRIPT POUR LA LECTURE EN GRAND FORMAT -->
     <script>
         const lightbox = document.getElementById('lightbox');
         const lightboxVideo = document.getElementById('lightbox-video');
         const lightboxClose = document.getElementById('lightbox-close');
-        const galleryVideos = document.querySelectorAll('.gallery-video');
+        const videoCards = document.querySelectorAll('.video-card');
 
         // Fonction pour fermer la lightbox
         const closeLightbox = () => {
             lightbox.style.display = 'none';
             lightboxVideo.pause();
-            lightboxVideo.src = ""; // Stoppe le chargement en arrière-plan
+            lightboxVideo.src = ""; // Stoppe la vidéo et libère la mémoire
             document.body.style.overflow = 'auto';
         };
 
-        galleryVideos.forEach(video => {
-            video.addEventListener('click', () => {
-                const videoSrc = video.getAttribute('src');
+        // Ouverture de la lightbox au clic
+        videoCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('.gallery-thumb');
+                const videoSrc = img.getAttribute('data-video');
+                
                 lightboxVideo.src = videoSrc;
                 lightbox.style.display = 'flex';
                 lightboxVideo.play();
